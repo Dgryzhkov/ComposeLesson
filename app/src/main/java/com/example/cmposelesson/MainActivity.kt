@@ -1,14 +1,14 @@
 package com.example.cmposelesson
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -27,7 +28,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column() {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
+                ListItem(name = "AAA aaaa", prof = "BBBBBBB")
                 ListItem(name = "AAA aaaa", prof = "BBBBBBB")
                 ListItem(name = "AAA aaaa", prof = "BBBBBBB")
                 ListItem(name = "AAA aaaa", prof = "BBBBBBB")
@@ -46,7 +59,12 @@ private fun ListItem(name: String, prof: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp),
+            .padding(10.dp)
+            .pointerInput(Unit) {
+                detectDragGesturesAfterLongPress { change, dragAmount ->
+                    Log.d("MyLog", "$dragAmount")
+                }
+            },
         shape = RoundedCornerShape(15.dp),
         elevation = 5.dp
     ) {
