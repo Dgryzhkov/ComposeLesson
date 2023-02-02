@@ -8,6 +8,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
@@ -36,19 +37,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LazyColumn(
-                horizontalAlignment = Alignment.CenterHorizontally,
+            LazyRow(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .background(Color.Gray)
             ) {
                 itemsIndexed(
-                    listOf("item1", "item2", "start", "finish")
-                ) { index, items ->
-                    Text(
-                        text = items,
-                        fontSize = 30.sp,
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    )
+                    listOf(
+                        ItemRowModel(R.drawable.image_1, "Миша"),
+                        ItemRowModel(R.drawable.image_2, "Вася"),
+                        ItemRowModel(R.drawable.image_3, "Миша"),
+                        ItemRowModel(R.drawable.image_4, "Вася"),
+                        ItemRowModel(R.drawable.image_5, "Миша"),
+                        ItemRowModel(R.drawable.image_6, "Вася"),
+
+                        )
+                ) { _, item ->
+                    ItemComposable(itemRowModel = item)
                 }
 
             }
