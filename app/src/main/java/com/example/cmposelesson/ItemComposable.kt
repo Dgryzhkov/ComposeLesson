@@ -2,13 +2,12 @@ package com.example.cmposelesson
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,11 +21,14 @@ import androidx.compose.ui.unit.dp
  */
 @Composable
 fun ItemComposable(itemRowModel: ItemRowModel) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+    var isExpanded by remember {
+        mutableStateOf(false)
+    }
+    Row(
         modifier = Modifier
-            .padding(horizontal = 3.dp)
-            .background(Color.Blue)
+            .padding(3.dp)
+            .fillMaxWidth()
+            .background(Color.White)
 
     ) {
         Image(
@@ -38,7 +40,16 @@ fun ItemComposable(itemRowModel: ItemRowModel) {
                 .size(64.dp)
                 .clip(CircleShape)
         )
-        Text(text = itemRowModel.title)
+        Column(
+            modifier = Modifier
+                .padding(start = 10.dp, top = 3.dp, end = 5.dp)
+        ) {
+            Text(text = itemRowModel.title)
+            Text(modifier = Modifier.clickable {
+                isExpanded = !isExpanded
+            }, maxLines = if (isExpanded) 10 else 3, text = itemRowModel.content)
+        }
+
     }
 
 }
